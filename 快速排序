@@ -1,0 +1,39 @@
+public class a {
+    public  int sort(int[] array,int low,int high){
+        int temp=array[low];
+        while(high>low) {
+            while (high > low) {
+                if (array[high] < temp) {
+                    array[low] = array[high];
+                    break;
+                } else
+                    high--;
+            }
+            while(high>low){
+                if(array[low]>temp){
+                    array[high]=array[low];
+                    break;
+                }else
+                    low++;
+            }
+        }
+        array[high]=temp;
+        return high;
+    }
+    public void quicksort(int[] array,int low,int high){
+        int loc;
+        if(low<high){
+            loc=sort(array,low,high);
+            quicksort(array,low,loc-1);
+            quicksort(array,loc+1,high);
+        }
+    }
+    public static void main(String[] args){
+        int[] array={100,18,22,36,78};
+        a eg=new a();
+        eg.quicksort(array,0,array.length-1);
+        for(int i:array){
+            System.out.println(i);
+        }
+    }
+}
