@@ -1,0 +1,22 @@
+public class a {
+    public  void sort(int[] array){
+        int length=array.length;
+        for(int i=0;i<length-1;i++){
+            for(int j=i+1;j<length;j++){
+                if(array[i]>array[j]){
+                    int temp=array[i];
+                    array[i]=array[j];
+                    array[j]=temp;
+                }
+            }
+        }
+    }
+    public static void main(String[] args){
+        int[] array={100,18,22,36,78};
+        a eg=new a();
+        eg.sort(array);
+        for(int i:array){
+            System.out.println(i);
+        }
+    }
+}
