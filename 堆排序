@@ -1,0 +1,40 @@
+public class a {
+    public  void reheap(int root,int leftdex,int[] array){ //重建堆（此处为大根堆）
+        int leftchild=2*root+1;
+        int temp=array[root];
+        boolean flag=false;
+        while(leftchild<=leftdex&!flag){
+            if(leftchild<leftdex&&array[leftchild]<array[leftchild+1])
+                leftchild++;
+            if(array[root]>array[leftchild])
+                flag=true;
+            else{
+                array[root]=array[leftchild];
+                array[leftchild]=temp;
+                root=leftchild;
+                leftchild=2*leftchild+1;
+            }
+
+        }
+    }
+    public  void HeapSort(int[] array){     //具体排序
+        int length=array.length;
+        for(int i=length/2-1;i>=0;i--){
+            reheap(i,length-1,array);
+        }
+        for(int i=0;i<length;i++){
+            int temp=array[0];
+            array[0]=array[length-1-i];
+            array[length-1-i]=temp;
+            reheap(0,length-2-i,array);
+        }
+    }
+    public static void main(String[] args){  //test
+        int[] array={100,18,22,36,78};
+        a eg=new a();
+        eg.HeapSort(array);
+        for(int i:array){
+            System.out.println(i);
+        }
+    }
+}
