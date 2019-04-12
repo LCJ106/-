@@ -1,0 +1,41 @@
+//看伪代码那么好写，自己一调超级多溢出bug，花了这么久的时间，我窒息了。
+//基数排序时间复杂度O(d*n),d是位数，一般情况下，（d固定远小于n）可认为是O（n），平均、最优、最坏皆是。话说我归并还没写，，，qwq
+import java.util.*;
+public class a {
+    public void sort(int[] array,int n){   //n为最大数的位数
+        int length=array.length;
+        int temp=1;
+        LinkedList<Integer>[] array1=new LinkedList[10];  //用LinkedList实现桶，创建一个桶的数组，大小10，分别对应桶0-桶9
+        for(int i=0;i<10;i++){
+            array1[i]=new LinkedList<Integer>();
+        }
+        for(int i=1;i<=n;i++){
+            for(int j=0;j<length;j++){
+                String string=new Integer(array[j]).toString();
+                int index;  //下面的代码是为了获取数的倒数第i位的值。本来用for循环在数前边加0的，优化了一下，直接把不存在的一位置0
+                if(string.length()<i){
+                    index=0;
+                }
+                else
+                    index=string.charAt(string.length()-i)-48; 
+                array1[index].add(array[j]);
+            }
+            int count=0;
+            for(int k=0;k<9;k++){
+                while(!array1[k].isEmpty()){
+                    array[count]=array1[k].removeFirst();
+                    count++;
+                }
+            }
+        }
+
+    }
+    public static void main(String[] args){
+        int[] array={100,18,22,36,78};
+        a eg=new a();
+        eg.sort(array,3);
+        for(int i:array){
+            System.out.println(i);
+        }
+    }
+}
