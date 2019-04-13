@@ -1,0 +1,51 @@
+//哭了，看着伪码写的，有些变量感觉没必要设，写到一半感觉那么设逻辑清晰点，又去改
+public class a {
+    public void sort(int[] array,int[] tempArray,int first,int last){     //归并排序
+        if(first<last){
+            int mid=first+(last-first)/2;
+            sort(array,tempArray,first,mid);
+            sort(array,tempArray,mid+1,last);
+            merge(array,tempArray,first,mid,last);
+        }
+    }
+    public void merge(int[] a,int[] tempArray,int first,int mid,int last){  //两路合并
+        int index=0;
+        int beginhalf2=mid+1,beginhalf1=first,endhalf1=mid,endhalf2=last;
+        while((beginhalf1<=endhalf1)&&beginhalf2<=endhalf2){  //把两部分中的一个完全复制到辅助数组
+            if(a[beginhalf1]<a[beginhalf2]){
+                tempArray[index]=a[beginhalf1];
+                beginhalf1++;
+            }
+            else{
+                tempArray[index]=a[beginhalf2];
+                beginhalf2++;
+            }
+            index++;
+        }
+        //有一个没复制完，继续复制
+        if(beginhalf1>endhalf1){
+            for(int i=beginhalf2;i<=endhalf2;i++){
+                tempArray[index++]=a[i];
+            }
+        }
+        else{
+            for(int i=beginhalf1;i<=endhalf1;i++){
+                tempArray[index++]=a[i];
+            }
+        }
+        for(int i:tempArray){    //合并的结果返回到对应的原数组位置
+            a[first++]=i;
+            if (first>last)
+                break;
+        }
+    }
+    public static void main(String[] args){
+        int[] array={7,5,9,3,6,0,2,4};
+        int[] tempArray=new int[array.length];   //辅助空间O(n)
+        a eg=new a();
+        eg.sort(array,tempArray,0,array.length-1);
+        for(int i:array){
+            System.out.println(i);
+        }
+    }
+}
