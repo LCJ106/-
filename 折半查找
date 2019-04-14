@@ -1,0 +1,29 @@
+//自己写的折半查找，我真是看递归看疯了，看了眼书上的，我写的就很粗糙，等下写书上的
+import java.util.*;
+public class Main {
+    public  static boolean search(int[] array,int n,int first,int last){
+        if (first<=last) {
+            int mid = (last - first) / 2 + first;
+            if (array[mid] == n)
+                return true;
+            if (array[mid] < n) {
+                if (search(array, n, mid + 1, last))
+                    return true;
+                else
+                    return false;
+            } else if (search(array, n, 0, mid - 1))
+                return true;
+            else
+                return false;
+        }
+        else
+            return false;
+    }
+    public static void main(String[] args){
+        Scanner reader=new Scanner(System.in);
+        int array[]={1,2,3,5,6,7,8,9};
+        int input=reader.nextInt();
+        if(search(array,input,0,7))
+           System.out.println("successful");
+    }
+}
