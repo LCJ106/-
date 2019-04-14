@@ -1,0 +1,28 @@
+/*书上的二分查找，逻辑更清晰，今天看递归看的脑子都是蒙的。
+2019.4.14刚考完ACM预选赛，用的java，编译错误，本地运行正常，到快交卷才想起来是不是要改成Main类,改了一下果然没有编译错误，
+五题做出来两题，发现是Main类的问题后只来得及重新提交一题，还超时了。唉心累，话说别人都是c、c艹编写，我用java编时间要求一样
+很吃亏哎 〒▽〒
+*/
+import java.util.*;
+public class Main {
+    public static int search(int[] array,int n,int first,int last){
+        while(first<=last){
+            int mid=(first+last)/2;
+            if(array[mid]==n)
+                return mid;
+            if(array[mid]>n){
+                last=mid-1;
+            }
+            else
+                first=mid+1;
+        }        
+        return -1;
+    }
+    public static void main(String[] args){
+        Scanner reader=new Scanner(System.in);
+        int array[]={1,2,3,5,6,7,8,9};
+        int input=reader.nextInt();
+        if(search(array,input,0,7)!=-1)
+           System.out.println(search(array,input,0,7));
+    }
+}
