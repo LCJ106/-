@@ -22,11 +22,11 @@ public class a {
         for(int i=length/2-1;i>=0;i--){
             reheap(i,length-1,array);
         }
-        for(int i=0;i<length;i++){
-            int temp=array[0];
-            array[0]=array[length-1-i];
-            array[length-1-i]=temp;
-            reheap(0,length-2-i,array);
+        for(int i=length-1;i>0;i--){  //改了一下，循环变量从后边设会好很多·，话说自己写真的很多弯路。
+                    int temp=array[0];
+                    array[0]=array[i];
+                    array[i]=temp;
+                    reheap(0,i-1,array);
         }
     }
     public static void main(String[] args){  //test
